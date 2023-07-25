@@ -4,33 +4,31 @@ using Microsoft.Xna.Framework.Input;
 
 namespace pong;
 
-public class PlayerPaddle
+public class PlayerPaddle : BasePaddle
 {
-    private Vector2 _paddlePos;
-    private float paddleSpeed = 5;
 
-    public PlayerPaddle()
-    {
-        _paddlePos = new Vector2(20, Game1.WindowHeight / 2f - Game1.PaddleTexture.Height / 2f);
-    }
+    
         
-    public void Update()
+    public override void Update()
     {
         var keystate = Keyboard.GetState();
         if (keystate.IsKeyDown(Keys.W))
         {
-            _paddlePos.Y -= paddleSpeed;
+            PaddlePos.Y -= PaddleSpeed;
         }
         
         if (keystate.IsKeyDown(Keys.S))
         {
-            _paddlePos.Y += paddleSpeed;
+            PaddlePos.Y += PaddleSpeed;
         } 
+        
+        base.Update();
+
     }
+    
 
-    public void Draw(SpriteBatch spriteBatch)
+
+    public PlayerPaddle(Vector2 startPos) : base(startPos)
     {
-        spriteBatch.Draw(Game1.PaddleTexture,_paddlePos,Color.White);
-
     }
 }
